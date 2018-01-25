@@ -1,0 +1,7 @@
+---
+
+
+udev_rules_cmd: mydevs="sdb sdc sdd" ; export count=0 ; for mydev in $mydevs; do ((count+=1)) ; /lib/udev/scsi_id -g -u /dev/$mydev | awk '{print "KERNEL==\"sd?\", ENV{ID_SERIAL}==\""$1"\", SYMLINK+=\"oracleasm/disk"ENVIRON["count"]"\", OWNER=\"grid\", GROUP=\"asmadmin\", MODE=\"0660\""}' ; done
+
+/sbin/udevadm control --reload-rules
+/sbin/udevadm trigger

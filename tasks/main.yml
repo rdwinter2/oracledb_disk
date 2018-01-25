@@ -1,0 +1,20 @@
+---
+
+- name: Ensure /etc/scsi_id.config exists
+  file:
+    path: /etc/scsi_id.config
+    state: present
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Make SCSI devices trusted
+  lineinfile:
+    path: /etc/scsi_id.config
+    state: present
+    line: "options=-g"
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - scsi_id
