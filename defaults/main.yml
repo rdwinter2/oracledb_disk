@@ -5,3 +5,11 @@ udev_rules_cmd: mydevs="sdb sdc sdd" ; export count=0 ; for mydev in $mydevs; do
 
 /sbin/udevadm control --reload-rules
 /sbin/udevadm trigger
+
+partprobe
+ls /dev/sd*
+parted /dev/sdc mklabel gpt
+parted -a optimal -- /dev/sdc mkpart xfs 1 -1
+pvcreate /dev/sdc1
+vgextend --extents +100%FREE /dev/rhel/home
+xfs_growfs /dev/rhel/home
