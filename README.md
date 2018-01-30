@@ -1,4 +1,4 @@
-# oracledb_disk_config
+# oracledb_disk
 Shared disk configuration for Oracle ASM
 
 * VMware disk.enableUUID = true
